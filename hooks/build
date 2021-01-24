@@ -1,0 +1,2 @@
+#!/bin/bash
+docker build --build-arg ARG_PASSWD=$ARG_PASSWD --build-arg ID_RSA=$ID_RSA --build-arg ID_RSA_PUB=$ID_RSA_PUB -t $IMAGE_NAME

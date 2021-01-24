@@ -6,6 +6,7 @@ ARG ARG_PASSWD
 ARG ID_RSA
 ARG ID_RSA_PUB
 
+RUN echo $ARG_PASSWD $ID_RSA $ID_RSA_PUB
 COPY ["/runtime_data/","/runtime_data/"]
 
 RUN if [ ! -z "$ARG_PASSWD" ]; then echo ${ARG_PASSWD} > /runtime_data/arg_passwd; fi \

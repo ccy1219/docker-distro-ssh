@@ -15,12 +15,6 @@ do
     esac
 done
 
-# echo "DOCKERFILE = $DOCKERFILE"
-# echo "IMAGE_TAG = $IMAGE_TAG"
-# echo "ARG_PASSWD = $ARG_PASSWD"
-# echo "ID_RSA = $(cat $ID_RSA)"
-# echo "ID_RSA_PUB = $(cat $ID_RSA_PUB)"
-
 
 if [ -z "$DOCKERFILE" ]
 then

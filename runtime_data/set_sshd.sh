@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# param
-PASSWORD="root"
-
 # apt-get update first
 apt-get update -y
 
@@ -15,7 +12,7 @@ sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 # set root password
-echo "root:${PASSWORD}" |chpasswd
+echo "root:$(cat /runtime_data/arg_passwd)" |chpasswd
 
 mkdir -p /root/.ssh/
 cp /runtime_data/.ssh/id_rsa /root/.ssh/

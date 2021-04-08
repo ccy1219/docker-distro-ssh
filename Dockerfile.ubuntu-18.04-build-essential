@@ -1,0 +1,25 @@
+FROM ubuntu:18.04
+
+LABEL maintainer="ccy1219@gmail.com"
+
+ARG ARG_PASSWD
+ARG ID_RSA
+ARG ID_RSA_PUB
+
+COPY ["/runtime_data/","/runtime_data/"]
+
+RUN if [ ! -z "$ARG_PASSWD" ]; then echo ${ARG_PASSWD} > /runtime_data/arg_passwd; fi \
+    && if [ ! -z "$ID_RSA" ]; then echo ${ID_RSA} > /runtime_data/id_rsa; fi \
+    && if [ ! -z "$ID_RSA_PUB" ]; then echo ${ID_RSA_PUB} > /runtime_data/id_rsa.pub; fi \
+    && chmod +x /runtime_data/*.sh \
+    && /runtime_data/set_sshd.sh \
+    && /runtime_data/install_packages.sh \
+    && rm -rf /runtime_data \
+	&& apt-get update \
+	&& apt-get install -y build-essential libgl1-mesa-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+EXPOSE 22
+WORKDIR /root
+CMD    ["/usr/sbin/sshd", "-D"]
